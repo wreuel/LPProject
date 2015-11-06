@@ -10,18 +10,18 @@
 
 class Nave {
 public:
-	float p_x, p_y;
+	int p_x, p_y;
 	int vida;
 	int tamanho;
 	int municao;
 	int kills;
 
 
-	Nave();
+	Nave(int px = 0, int py=0);
 
 	void Start();
 
-	void Update();
+	void Update(ALLEGRO_EVENT e);
 
 	void Render();
 

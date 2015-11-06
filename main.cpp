@@ -37,7 +37,7 @@ int main() {
     bool finalized = false;
 
     /*Player/Nave Do Jogador*/
-    Nave *navePlayer = new Nave();
+    Nave *navePlayer = new Nave(LARGURA/2, ALTURA); 
 
     /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *l = new GameObjectList();
@@ -65,11 +65,24 @@ int main() {
 		
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-				switch (evento.keyboard.keycode) {
+			if(evento.keyboard.keycode == 59) {
+				finalized = true;
+			}
+			else {
+				navePlayer->Update(evento);
+				//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+			}
+			
+				/*switch (evento.keyboard.keycode) {
 					case ALLEGRO_KEY_ESCAPE:
-						finalized = true;
+						//finalized = true;
 						break;
-				}
+					case 4:
+						navePlayer->Update();
+						//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
+						break;
+				}*/
+			
 		}
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
@@ -79,7 +92,6 @@ int main() {
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 				// atualizar estado
 
-			
 				// desenhar
 				navePlayer->Render();
 				bola->Render();
