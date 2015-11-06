@@ -1,7 +1,10 @@
+#define LARGURA 800
+#define ALTURA 600
 #include <iostream>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <typeinfo>
+#include "Nave.h"
 #include "GameObject.h"
 #include "GameObjectList.h"
 #include "Circulo.h"
@@ -16,7 +19,8 @@ int main() {
 		cout << "Erro inicializando allegro" << endl;
 	}
 
-	ALLEGRO_DISPLAY *tela = al_create_display(800, 600);
+
+	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
 	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
 
@@ -24,15 +28,18 @@ int main() {
 	al_install_mouse();
 	al_init_primitives_addon();
 
-
+	/*Iniciar Eventos */
 	al_register_event_source(fila_eventos, al_get_keyboard_event_source());
 	al_register_event_source(fila_eventos, al_get_mouse_event_source());
 	al_register_event_source(fila_eventos, al_get_timer_event_source(timer));
 
-
-	
-
+	/*Variavel que verifica estado do jogo*/
     bool finalized = false;
+
+    /*Player/Nave Do Jogador*/
+    Nave *navePlayer = new Nave();
+
+    /*Lista de Objetos (Inimigos ou Asteroides)*/
     GameObjectList *l = new GameObjectList();
 
     GameObject *bola = new Circulo();
@@ -50,8 +57,7 @@ int main() {
     
     ALLEGRO_EVENT evento;
 	al_start_timer(timer);
-	float pos_x, pos_y;
-	cout<< "coisa1" <<endl;
+
 	while (!finalized) {
 
 
@@ -72,8 +78,10 @@ int main() {
 
 		if (evento.type == ALLEGRO_EVENT_TIMER) {
 				// atualizar estado
+
 			
 				// desenhar
+				navePlayer->Render();
 				bola->Render();
 				ret->Render();
 				al_flip_display();
