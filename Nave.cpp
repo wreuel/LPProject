@@ -23,7 +23,7 @@ void Nave::Start(){
 void Nave::Update(ALLEGRO_EVENT e){
     std::cout << "Nave Atualizada!" << std::endl;
     std::cout << "KEYDOWN: " << e.keyboard.keycode << endl;
-    
+    cout << "Teste";
 }
 
 void Nave::Render(){
