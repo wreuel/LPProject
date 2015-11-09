@@ -19,6 +19,14 @@ public:
 
 	Nave(int px = 0, int py=0);
 
+	void Up();
+
+	void Down();
+
+	void Left();
+
+	void Right();
+
 	void Start();
 
 	void Update(ALLEGRO_EVENT e);

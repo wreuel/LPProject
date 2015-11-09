@@ -21,7 +21,7 @@ int main() {
 
 
 	ALLEGRO_DISPLAY *tela = al_create_display(LARGURA, ALTURA);
-	ALLEGRO_TIMER *timer = al_create_timer(1.0/30.0);
+	ALLEGRO_TIMER *timer = al_create_timer(1.0/60.0);
     ALLEGRO_EVENT_QUEUE *fila_eventos = al_create_event_queue();
 
 	al_install_keyboard();
@@ -56,34 +56,43 @@ int main() {
     l->Adicionar(ret);
     
     ALLEGRO_EVENT evento;
+    ALLEGRO_KEYBOARD_STATE estado_teclado;
 	al_start_timer(timer);
 
 	while (!finalized) {
 
 
 		al_wait_for_event(fila_eventos, &evento);
+		al_get_keyboard_state(&estado_teclado);
+		if(al_key_down(&estado_teclado, ALLEGRO_KEY_W) || al_key_down(&estado_teclado, ALLEGRO_KEY_UP)) {
+			navePlayer->Up();
+		}
+		if(al_key_down(&estado_teclado, ALLEGRO_KEY_S) || al_key_down(&estado_teclado, ALLEGRO_KEY_DOWN)) {
+			navePlayer->Down();
+		}
+		if(al_key_down(&estado_teclado, ALLEGRO_KEY_A) || al_key_down(&estado_teclado, ALLEGRO_KEY_LEFT)) {
+			navePlayer->Left();
+		}
+		if(al_key_down(&estado_teclado, ALLEGRO_KEY_D) || al_key_down(&estado_teclado, ALLEGRO_KEY_RIGHT)){
+			navePlayer->Right();
+		}
 		
+		//navePlayer->Update(estado_teclado*, evento);
 
 		if (evento.type == ALLEGRO_EVENT_KEY_DOWN) {
-			if(evento.keyboard.keycode == 59) {
+			if(evento.keyboard.keycode == 59 || evento.keyboard.keycode==ALLEGRO_KEY_ESCAPE) {
 				finalized = true;
 			}
 			else {
-				navePlayer->Update(evento);
+				//navePlayer->Update(&estado_teclado, evento);
+				//navePlayer->Update(&estado_teclado);
 				//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
 			}
 			
-				/*switch (evento.keyboard.keycode) {
-					case ALLEGRO_KEY_ESCAPE:
-						//finalized = true;
-						break;
-					case 4:
-						navePlayer->Update();
-						//cout << "KEYDOWN: " << evento.keyboard.keycode << endl;
-						break;
-				}*/
-			
 		}
+
+
+
 
 		if (evento.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP){
 			l->MouseDown(evento.mouse.x, evento.mouse.y);
