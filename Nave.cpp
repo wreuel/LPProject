@@ -23,6 +23,23 @@ void Nave::Start(){
 void Nave::Update(ALLEGRO_EVENT e){
     std::cout << "Nave Atualizada!" << std::endl;
     std::cout << "KEYDOWN: " << e.keyboard.keycode << endl;
+    switch (e.keyboard.keycode) {
+    	case ALLEGRO_KEY_D: case 83:
+    		this->p_x+=10;
+    		break;
+    	case ALLEGRO_KEY_A: case 82:
+    		this->p_x-=10;
+    		break;
+    	case ALLEGRO_KEY_W: case 84:
+    		this->p_y-=10;
+    		break;
+    	case ALLEGRO_KEY_S: case 85:
+    		this->p_y+=10;
+    		break;
+    	case 75:
+    		std::cout << "SPACE: "<< endl;
+    		break;
+    }
     cout << "Teste";
 }
 
