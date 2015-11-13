@@ -4,6 +4,9 @@
 #include <allegro5/allegro_primitives.h>
 #include <string>
 #include <typeinfo>
+#include "GameObjectList.h"
+
+class GameObjectList;
 
 class GameObject{
     public:
@@ -17,7 +20,11 @@ class GameObject{
 
 		virtual void Start();
 
+		//virtual void Update(GameObject *item, GameObjectList *Lista);
+
 		virtual void Update();
+
+		virtual bool Devo_Morrer();
 
 		virtual void Render();
 

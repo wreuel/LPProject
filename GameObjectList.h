@@ -5,6 +5,9 @@
 #include <string>
 #include <typeinfo>
 #include "GameObject.h"
+#include <math.h>
+
+class GameObject;
 
 class NoDaLista {
 public:
@@ -15,10 +18,23 @@ public:
 class GameObjectList {
 public:
     NoDaLista *inicio;
+    //float tam_x, tam_y;
 
     GameObjectList();
 
 	void Adicionar(GameObject *item);
+
+	void RemoverSeq(GameObject *item);
+
+	void Remover(GameObject *item);
+
+	void Render();
+
+	void Update();
+
+	//void Update(GameObjectList *Lista);
+
+	void Impacto(GameObjectList *Lista);
 
 	int MouseDown(float x, float y);
 };
